@@ -13,7 +13,6 @@ dependencyResolutionManagement {
     }
     versionCatalogs {
         create("libs") {
-            // Define core dependency version targets explicitly for stability
             version("androidGradlePlugin", "8.2.2")
             version("kotlin", "1.9.22")
             version("coreKtx", "1.12.0")
