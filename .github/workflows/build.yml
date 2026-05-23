@@ -42,13 +42,13 @@ jobs:
         echo "Processing Prompt: $PROMPT"
         python scripts/ai_builder.py --name "$APP_NAME" --prompt "$PROMPT"
 
-    # Yeh step pure Gradle environment ko automatic setup aur cache karega
+    # Yeh step GitHub runner par automatic fresh Gradle install karega (No gradlew file needed)
     - name: Setup Gradle
       uses: gradle/actions/setup-gradle@v3
       with:
         gradle-version: 8.5
 
-    # Agar gradlew file nahi bhi hai, toh hum direct global gradle command se build karenge
+    # Direct global gradle command se build karenge
     - name: Build Debug APK via Gradle
       run: |
         cd android-template
