@@ -9,9 +9,6 @@ def parse_arguments():
     return parser.parse_args()
 
 def update_app_name(app_name):
-    """
-    Modifies strings.xml to dynamically apply the requested app name.
-    """
     strings_path = os.path.join('android-template', 'app', 'src', 'main', 'res', 'values', 'strings.xml')
     print(f"[*] Updating application name to '{app_name}' inside {strings_path}...")
     
@@ -19,7 +16,6 @@ def update_app_name(app_name):
         tree = ET.parse(strings_path)
         root = tree.getroot()
         
-        # Search for <string name="app_name">
         for string_tag in root.findall('string'):
             if string_tag.get('name') == 'app_name':
                 string_tag.text = app_name
@@ -38,7 +34,6 @@ def main():
     print(f"[->] Received Target App Name : {args.name}")
     print(f"[->] Received Execution Prompt : {args.prompt}")
     
-    # Run modifications
     update_app_name(args.name)
     
     print("[*] Foundation adjustments done. Handing execution back to Gradle build pipeline...")
