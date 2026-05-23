@@ -36,13 +36,17 @@ jobs:
 
     - name: Parse Inputs and Run AI Builder Orchestrator
       env:
-        # Extract variables dynamically depending on how the workflow was triggered
         APP_NAME: ${{ github.event.inputs.app_name || github.event.client_payload.app_name }}
         PROMPT: ${{ github.event.inputs.prompt || github.event.client_payload.prompt }}
       run: |
         echo "Processing App Name: $APP_NAME"
         echo "Processing Prompt: $PROMPT"
         python scripts/ai_builder.py --name "$APP_NAME" --prompt "$PROMPT"
+
+    - name: Generate Gradle Wrapper
+      run: |
+        cd android-template
+        gradle wrapper --gradle-version 8.5
 
     - name: Grant Execute Permission to Gradle
       run: chmod +x android-template/gradlew
